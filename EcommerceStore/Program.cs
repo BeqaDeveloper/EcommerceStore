@@ -1,7 +1,19 @@
+using EcommerceStore.Domain.DbContexts;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(connectionString));
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+//builder.Services.AddSwaggerGen(option =>
+//{
+//    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Eccomerce", Version = "v1" });
+//});
 
 var app = builder.Build();
 
